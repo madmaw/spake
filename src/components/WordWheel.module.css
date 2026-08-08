@@ -43,9 +43,11 @@
 .trash {
     align-items: center;
     background: var(--panel);
+    border: none;
     border-radius: 50%;
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
     color: var(--muted);
+    cursor: pointer;
     display: flex;
     height: 52px;
     justify-content: center;
@@ -56,6 +58,17 @@
         color 0.15s,
         transform 0.15s;
     width: 52px;
+}
+
+@media (hover: hover) {
+    .trash:hover {
+        background: var(--panel-raised);
+        color: var(--text);
+    }
+}
+
+.trash:active {
+    transform: scale(0.92);
 }
 
 .trash[data-active="true"] {

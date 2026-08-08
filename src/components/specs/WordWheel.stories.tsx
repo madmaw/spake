@@ -5,10 +5,13 @@ import { fn } from "storybook/test";
 const meta = {
     args: {
         onCapacityChange: fn(),
+        onDeleteLast: fn(),
+        onNavigate: fn(),
         onPushBack: fn(),
         onReorder: fn(),
         onSelect: fn(),
         onTrash: fn(),
+        previousWord: null,
     },
     component: WordWheel,
     decorators: [
@@ -58,5 +61,13 @@ export const FewWords: Story = {
     args: {
         onMore: null,
         words: ["you", "please", "water", "help", "now"],
+    },
+};
+
+export const WithPreviousWord: Story = {
+    args: {
+        onMore: fn(),
+        previousWord: "water",
+        words: ["please", "would", "and", "with", "for", "is", "now", "too"],
     },
 };

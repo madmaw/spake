@@ -68,12 +68,24 @@ export function App() {
         changeText(next);
     };
 
-    // tapping a word completes the word being typed (or continues the
-    // sentence) and leaves a trailing space so the next tap is a continuation
-    const selectWord = (word: string) => {
-        speakWord(word);
+    // choosing a word completes the word being typed (or continues the
+    // sentence) and leaves a trailing space so the next choice continues on.
+    // Swipe navigation chooses without speaking.
+    const selectWord = (word: string, speak: boolean) => {
+        if (speak) {
+            speakWord(word);
+        }
         predictor.learn(context, word);
         changeText(`${[...context, word].join(" ")} `);
+    };
+
+    // the trash button steps back one word
+    const deleteLastWord = () => {
+        if (tokens.length === 0) {
+            return;
+        }
+        const remaining = tokens.slice(0, -1);
+        changeText(remaining.length === 0 ? "" : `${remaining.join(" ")} `);
     };
 
     const speakSentence = () => {
@@ -144,15 +156,18 @@ export function App() {
                         <div className={styles.wheelArea}>
                             <WordWheel
                                 onCapacityChange={changeCapacity}
+                                onDeleteLast={deleteLastWord}
                                 onMore={
                                     pageCount > 1
                                         ? () => setPage((page + 1) % pageCount)
                                         : null
                                 }
+                                onNavigate={(word) => selectWord(word, false)}
                                 onPushBack={pushBackWord}
                                 onReorder={reorderWord}
-                                onSelect={selectWord}
+                                onSelect={(word) => selectWord(word, true)}
                                 onTrash={trashWord}
+                                previousWord={context.at(-1) ?? null}
                                 words={words}
                             />
                         </div>
