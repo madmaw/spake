@@ -1,0 +1,32 @@
+:root {
+    --bg: #0b0e17;
+    --panel: #151a28;
+    --panel-raised: #1d2436;
+    --text: #e8ecf8;
+    --muted: #8b93ab;
+    --placeholder: #4b5470;
+    --accent: #ffd166;
+    color-scheme: dark;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    -webkit-tap-highlight-color: transparent;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+button,
+select,
+input {
+    font: inherit;
+}

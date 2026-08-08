@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "paths": {
+            "src/*": ["./src/*"]
+        },
+        "plugins": [{ "name": "typescript-plugin-css-modules" }],
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ESNext",
+        "types": ["css-modules", "vitest/globals", "vite/client"],
+        "useDefineForClassFields": true
+    },
+    "display": "words",
+    "exclude": ["build", "dist", "node_modules", "storybook-static"],
+    "include": ["src", ".vitest/install.ts", ".storybook/preview.tsx"]
+}

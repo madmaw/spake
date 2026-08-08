@@ -1,0 +1,23 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+.speak {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.wheelArea {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}

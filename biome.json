@@ -1,0 +1,144 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": ["**/*.css"]
+                    }
+                },
+                "useSortedAttributes": "on",
+                "useSortedKeys": "on"
+            }
+        },
+        "enabled": true
+    },
+    "css": {
+        "parser": {
+            "cssModules": true
+        }
+    },
+    "files": {
+        "includes": [
+            "**",
+            "!**/build",
+            "!**/dist",
+            "!**/storybook-static",
+            "!**/node_modules",
+            "!**/public",
+            "!**/*.snap",
+            "!**/*.generated.ts",
+            "!**/*.local.*",
+            "!**/test-results"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4
+    },
+    "javascript": {
+        "experimentalEmbeddedSnippetsEnabled": true,
+        "formatter": {
+            "arrowParentheses": "always",
+            "bracketSameLine": false,
+            "bracketSpacing": true,
+            "jsxQuoteStyle": "double",
+            "quoteProperties": "asNeeded",
+            "semicolons": "always",
+            "trailingCommas": "all"
+        }
+    },
+    "json": {
+        "formatter": {
+            "trailingCommas": "none"
+        }
+    },
+    "linter": {
+        "domains": {
+            "project": "recommended",
+            "react": "recommended",
+            "test": "recommended"
+        },
+        "enabled": true,
+        "rules": {
+            "a11y": {
+                "noSvgWithoutTitle": "off",
+                "useAltText": "error"
+            },
+            "complexity": {
+                "noExcessiveCognitiveComplexity": "warn",
+                "noForEach": "off",
+                "noUselessUndefined": "error",
+                "useMaxParams": {
+                    "level": "error",
+                    "options": {
+                        "max": 6
+                    }
+                }
+            },
+            "correctness": {
+                "noConstantCondition": "off",
+                "noUnreachable": "error",
+                "noUnusedFunctionParameters": {
+                    "fix": "none",
+                    "level": "warn"
+                },
+                "noUnusedImports": {
+                    "fix": "unsafe",
+                    "level": "warn"
+                },
+                "noUnusedPrivateClassMembers": {
+                    "fix": "none",
+                    "level": "warn"
+                },
+                "noUnusedVariables": {
+                    "fix": "none",
+                    "level": "warn"
+                },
+                "useExhaustiveDependencies": {
+                    "fix": "none",
+                    "level": "error",
+                    "options": {
+                        "hooks": [
+                            {
+                                "name": "useState",
+                                "stableResult": [1]
+                            }
+                        ]
+                    }
+                },
+                "useHookAtTopLevel": "off"
+            },
+            "preset": "recommended",
+            "style": {
+                "noInferrableTypes": "error",
+                "noNegationElse": "error",
+                "noUnusedTemplateLiteral": "error",
+                "noUselessElse": "error",
+                "useAsConstAssertion": "error",
+                "useBlockStatements": "error",
+                "useConsistentObjectDefinitions": "error",
+                "useConst": "error",
+                "useDefaultParameterLast": "error",
+                "useEnumInitializers": "error",
+                "useNumberNamespace": "error",
+                "useSelfClosingElements": "error",
+                "useSingleVarDeclarator": "error"
+            },
+            "suspicious": {
+                "noConsole": {
+                    "fix": "none",
+                    "level": "error",
+                    "options": {
+                        "allow": ["error", "warn"]
+                    }
+                },
+                "noDoubleEquals": "error"
+            }
+        }
+    }
+}

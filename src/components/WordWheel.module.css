@@ -1,0 +1,76 @@
+.wheel {
+    background: radial-gradient(circle at 50% 45%, #161d31, var(--bg) 75%);
+    inset: 0;
+    position: absolute;
+    touch-action: none;
+}
+
+.more {
+    align-items: center;
+    background: var(--accent);
+    border: none;
+    border-radius: 50%;
+    color: var(--bg);
+    cursor: pointer;
+    display: flex;
+    height: 56px;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+    width: 56px;
+}
+
+@media (hover: hover) {
+    .more:hover {
+        filter: brightness(1.12);
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+.more:active {
+    transform: translate(-50%, -50%) scale(0.92);
+}
+
+.more[data-active="true"] {
+    filter: brightness(1.15);
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.trash {
+    align-items: center;
+    background: var(--panel);
+    border-radius: 50%;
+    bottom: 16px;
+    color: var(--muted);
+    display: flex;
+    height: 52px;
+    justify-content: center;
+    position: absolute;
+    right: 16px;
+    transition:
+        background 0.15s,
+        color 0.15s,
+        transform 0.15s;
+    width: 52px;
+}
+
+.trash[data-active="true"] {
+    background: #e5484d;
+    color: #fff;
+    transform: scale(1.15);
+}
+
+.ghost {
+    color: var(--accent);
+    font-size: 24px;
+    left: 0;
+    pointer-events: none;
+    position: fixed;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 60%);
+    top: 0;
+    transform: translate(-50%, -120%);
+    z-index: 10;
+}
