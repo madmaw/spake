@@ -1,5 +1,8 @@
 # spake
 
+**Live at <https://madmaw.github.io/spake/>** — installable as a PWA from
+there (pushes to `main` deploy automatically via GitHub Actions).
+
 A speaking aid for when you've lost your voice. The app opens straight into a
 3D radial word cloud of the most likely next words. Tapping a word speaks it
 immediately and re-centres the predictions on it, so you can chain together
