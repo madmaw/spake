@@ -9,6 +9,7 @@ const meta = {
         onNavigate: fn(),
         onPushBack: fn(),
         onReorder: fn(),
+        onRepeat: fn(),
         onSelect: fn(),
         onTrash: fn(),
         previousWord: null,

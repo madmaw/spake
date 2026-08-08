@@ -27,6 +27,7 @@ type WordWheelProps = {
     readonly onNavigate: (word: string) => void;
     readonly onPushBack: (word: string) => void;
     readonly onReorder: (word: string, slot: number) => void;
+    readonly onRepeat: (word: string) => void;
     readonly onSelect: (word: string) => void;
     readonly onTrash: (word: string) => void;
     readonly previousWord: string | null;
@@ -250,8 +251,9 @@ function insertPreviousWord(
  * suggestions and the previously chosen word trailing behind on a line.
  *
  * A tap anywhere selects (and speaks) the nearest word; choosing a word
- * re-centres the cloud on where it was. Swiping from outside the ring
- * navigates to the word in that direction without speaking it. Words can be
+ * re-centres the cloud on where it was, and choosing the previous word
+ * repeats it. Swiping from outside the ring drags the cloud, navigating to
+ * the word opposite the swipe direction without speaking it. Words can be
  * dragged: onto the trash to remove them, onto the centre bubble to push them
  * back a page, or around the circle to reorder them. Tapping the trash
  * deletes the last word instead.
@@ -263,6 +265,7 @@ export function WordWheel({
     onNavigate,
     onPushBack,
     onReorder,
+    onRepeat,
     onSelect,
     onTrash,
     previousWord,
@@ -413,11 +416,16 @@ export function WordWheel({
 
     const choose = (slot: number, speak: boolean) => {
         const placedWord = placed[slot];
-        recentreOn(placedWord.position);
         if (placedWord.isPrevious === true) {
-            // choosing the previous word travels back along the line
-            onDeleteLast();
-        } else if (speak) {
+            // the previous word was already said; choosing it repeats it
+            // without moving anywhere
+            if (speak) {
+                onRepeat(placedWord.word);
+            }
+            return;
+        }
+        recentreOn(placedWord.position);
+        if (speak) {
             onSelect(placedWord.word);
         } else {
             onNavigate(placedWord.word);
@@ -502,10 +510,11 @@ export function WordWheel({
         const dx = event.clientX - swipe.startX;
         const dy = event.clientY - swipe.startY;
         // a real swipe navigates without speaking; a plain tap still selects
-        // (and speaks) the nearest word
+        // (and speaks) the nearest word. Swiping drags the cloud, so it
+        // navigates to the word OPPOSITE the swipe direction
         const swiped = Math.hypot(dx, dy) > SWIPE_THRESHOLD_PX;
         const slot = swiped
-            ? slotInDirection(dx, dy)
+            ? slotInDirection(-dx, -dy)
             : nearestSlot(event.clientX, event.clientY);
         if (slot != null) {
             choose(slot, !swiped);

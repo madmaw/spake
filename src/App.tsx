@@ -165,6 +165,7 @@ export function App() {
                                 onNavigate={(word) => selectWord(word, false)}
                                 onPushBack={pushBackWord}
                                 onReorder={reorderWord}
+                                onRepeat={speakWord}
                                 onSelect={(word) => selectWord(word, true)}
                                 onTrash={trashWord}
                                 previousWord={context.at(-1) ?? null}
