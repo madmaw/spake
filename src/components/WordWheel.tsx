@@ -27,7 +27,6 @@ type WordWheelProps = {
     readonly onNavigate: (word: string) => void;
     readonly onPushBack: (word: string) => void;
     readonly onReorder: (word: string, slot: number) => void;
-    readonly onRepeat: (word: string) => void;
     readonly onSelect: (word: string) => void;
     readonly onTrash: (word: string) => void;
     readonly previousWord: string | null;
@@ -251,12 +250,13 @@ function insertPreviousWord(
  * suggestions and the previously chosen word trailing behind on a line.
  *
  * A tap anywhere selects (and speaks) the nearest word; choosing a word
- * re-centres the cloud on where it was, and choosing the previous word
- * repeats it. Swiping from outside the ring drags the cloud, navigating to
- * the word opposite the swipe direction without speaking it. Words can be
- * dragged: onto the trash to remove them, onto the centre bubble to push them
- * back a page, or around the circle to reorder them. Tapping the trash
- * deletes the last word instead.
+ * re-centres the cloud on where it was. Tapping the previous word says it
+ * again. Swiping from outside the ring drags the cloud, navigating to the
+ * word opposite the swipe direction without speaking it — swiping back to
+ * the previous word steps back instead, like the trash button, which deletes
+ * the last word when tapped. Words can be dragged: onto the trash to remove
+ * them, onto the centre bubble to push them back a page, or around the
+ * circle to reorder them.
  */
 export function WordWheel({
     onCapacityChange,
@@ -265,7 +265,6 @@ export function WordWheel({
     onNavigate,
     onPushBack,
     onReorder,
-    onRepeat,
     onSelect,
     onTrash,
     previousWord,
@@ -417,10 +416,14 @@ export function WordWheel({
     const choose = (slot: number, speak: boolean) => {
         const placedWord = placed[slot];
         if (placedWord.isPrevious === true) {
-            // the previous word was already said; choosing it repeats it
-            // without moving anywhere
             if (speak) {
-                onRepeat(placedWord.word);
+                // tapping the previous word says it again ("no no no");
+                // repeating is not travel, so the cloud stays put and the
+                // word can be tapped repeatedly
+                onSelect(placedWord.word);
+            } else {
+                // swiping back along the line steps back, like the trash
+                onDeleteLast();
             }
             return;
         }
