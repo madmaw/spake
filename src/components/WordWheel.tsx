@@ -1,13 +1,14 @@
 import styles from "./WordWheel.module.css";
 import { Text, useCursor } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { IconDots, IconTrash } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 import {
     type PointerEvent as ReactPointerEvent,
     useEffect,
     useRef,
     useState,
 } from "react";
+import { SpeechBubbleIcon } from "src/components/SpeechBubbleIcon";
 import type { Group } from "three";
 
 // how far a pointer must travel before a tap becomes a drag
@@ -361,7 +362,7 @@ export function WordWheel({
                     ref={moreRef}
                     type="button"
                 >
-                    <IconDots aria-hidden size={28} />
+                    <SpeechBubbleIcon size={52} />
                 </button>
             )}
             <div

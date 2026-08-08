@@ -7,20 +7,21 @@
 
 .more {
     align-items: center;
-    background: var(--accent);
+    background: none;
     border: none;
-    border-radius: 50%;
-    color: var(--bg);
     cursor: pointer;
     display: flex;
-    height: 56px;
+    filter: drop-shadow(0 3px 10px rgb(0 0 0 / 40%));
+    height: 60px;
     justify-content: center;
     left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s;
-    width: 56px;
+    transition:
+        filter 0.15s,
+        transform 0.1s;
+    width: 60px;
 }
 
 @media (hover: hover) {
@@ -35,7 +36,7 @@
 }
 
 .more[data-active="true"] {
-    filter: brightness(1.15);
+    filter: brightness(1.15) drop-shadow(0 3px 10px rgb(0 0 0 / 40%));
     transform: translate(-50%, -50%) scale(1.15);
 }
 
