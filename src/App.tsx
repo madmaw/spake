@@ -7,6 +7,7 @@ import { WordWheel } from "src/components/WordWheel";
 import { useFavourites } from "src/favourites/useFavourites";
 import { Predictor } from "src/prediction/Predictor";
 import { speakPhrase, speakWord } from "src/speech/speech";
+import { useVisualViewportHeight } from "src/utils/useVisualViewportHeight";
 
 // how many words the wheel fits before it reports its real capacity
 const DEFAULT_PAGE_SIZE = 22;
@@ -28,6 +29,9 @@ export function App() {
     const [revision, setRevision] = useState(0);
     const predictor = useMemo(() => new Predictor(), []);
     const { add, favourites, remove } = useFavourites();
+    // iOS Safari overlays the keyboard instead of resizing the page; shrink
+    // the app to the visible area so the wheel reflows above the keyboard
+    const viewportHeight = useVisualViewportHeight();
 
     const trimmed = text.trim();
     const tokens = trimmed.length === 0 ? [] : trimmed.split(/\s+/);
@@ -141,7 +145,12 @@ export function App() {
     };
 
     return (
-        <div className={styles.app}>
+        <div
+            className={styles.app}
+            style={
+                viewportHeight == null ? undefined : { height: viewportHeight }
+            }
+        >
             <main className={styles.main}>
                 {tab === "speak" ? (
                     <div className={styles.speak}>
